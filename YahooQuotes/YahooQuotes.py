@@ -3,14 +3,11 @@
 
 import urllib2
 
-__revision__ = "$Id:$"
+__revision__ = "$Id$"
 
 class YahooQuoteFinder:
-    # Pimped Finance::YahooQuote which was proven reliable for 3 years
-    # without modifications. See http://dirk.eddelbuettel.com/code/.
     """
     Find stocks quotes from Yahoo! Finances.
-
     """
     def __init__(self, extended=False, realtime=False):
         """

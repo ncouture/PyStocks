@@ -1,0 +1,35 @@
+$Id:$
+
+a2: Average Daily Volume
+a: Ask
+b: Bid
+c1: Change
+c3: Commission
+c: Change Percent
+d2: Trade Date
+d: Dividend/Share
+e: Earnings/Share
+g1: Holdings Gain Percent
+g3: Annualized Gain
+g4: Holdings Gain
+i: More Info
+j1: Market Capitalization
+l1: Last Trade (Price Only)
+l2: High Limit
+l3: Low Limit
+l: Last Trade (With Time)
+m: Day's Range
+n4: Notes
+n: Name
+o: Open
+p1: Price Paid
+p: Previous Close
+q: Ex-Dividend Date
+r1: Dividend Pay Date
+r: P/E Ratio
+s1: Shares Owned
+v1: Holdings Value
+v: Volume
+w1: Day's Value Change
+w: 52-Week Range
+y: Dividend Yield

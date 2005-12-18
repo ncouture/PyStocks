@@ -1,2 +1,0 @@
-- Fix real time quotes - if fixable
-   YahooQuoteFinder(realtime=True) is equal to default

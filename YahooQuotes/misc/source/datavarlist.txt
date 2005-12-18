@@ -1,0 +1,708 @@
+n Name
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+n Name
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+n Name
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+n Name
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+n Name
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)
+l Last Trade (With Time)
+l1 Last Trade (Price Only)
+c Change  Percent
+c1 Change
+v Volume
+a2 Average Daily Volume
+i More Info
+b Bid
+a Ask
+p Previous Close
+o Open
+m Day's Range
+w 52-Week Range
+e Earnings/Share
+r P/E Ratio
+r1 Dividend Pay Date
+q Ex-Dividend Date
+d Dividend/Share
+y Dividend Yield
+j1 Market Capitalization
+s1 Shares Owned
+p1 Price Paid
+c3 Commission
+v1 Holdings Value
+w1 Day's Value Change
+g1 Holdings Gain  Percent
+g4 Holdings Gain
+d2 Trade Date
+g3 Annualized Gain
+l2 High Limit
+l3 Low Limit
+n4 Notes
+b2 Ask (Real-time)
+b3 Bid (Real-time)
+k2 Change  Percent (Real-time)
+k1 Last Trade (Real-time With Time)
+c6 Change (Real-time)
+v7 Holdings Value (Real-time)
+w4 Day's Value Change (Real-time)
+g5 Holdings Gain  Percent (Real-time)
+g6 Holdings Gain (Real-time)
+m2 Day's Range (Real-time)
+j3 Market Cap (Real-time)
+r2 P/E (Real-time)

@@ -1,0 +1,166 @@
+(dp1
+S'b2'
+p2
+S'Ask (Real-time)'
+p3
+sS'j1'
+p4
+S'Market Capitalization'
+p5
+sS'j3'
+p6
+S'Market Cap (Real-time)'
+p7
+sS'w4'
+p8
+S"Day's Value Change (Real-time)"
+p9
+sS'w1'
+p10
+S"Day's Value Change"
+p11
+sS'b3'
+p12
+S'Bid (Real-time)'
+p13
+sS'd2'
+p14
+S'Trade Date'
+p15
+sS's1'
+p16
+S'Shares Owned'
+p17
+sS'k2'
+p18
+S'Change Percent (Real-time)'
+p19
+sS'k1'
+p20
+S'Last Trade (Real-time With Time)'
+p21
+sS'p1'
+p22
+S'Price Paid'
+p23
+sS'm2'
+p24
+S"Day's Range (Real-time)"
+p25
+sS'g6'
+p26
+S'Holdings Gain (Real-time)'
+p27
+sS'g5'
+p28
+S'Holdings Gain Percent (Real-time)'
+p29
+sS'g4'
+p30
+S'Holdings Gain'
+p31
+sS'g3'
+p32
+S'Annualized Gain'
+p33
+sS'g1'
+p34
+S'Holdings Gain Percent'
+p35
+sS'v'
+S'Volume'
+p36
+sS'v1'
+p37
+S'Holdings Value'
+p38
+sS'a2'
+p39
+S'Average Daily Volume'
+p40
+sS'v7'
+p41
+S'Holdings Value (Real-time)'
+p42
+sS'c3'
+p43
+S'Commission'
+p44
+sS'c1'
+p45
+S'Change'
+p46
+sS'c6'
+p47
+S'Change (Real-time)'
+p48
+sS'd'
+S'Dividend/Share'
+p49
+sS'a'
+S'Ask'
+p50
+sS'c'
+S'Change Percent'
+p51
+sS'b'
+S'Bid'
+p52
+sS'e'
+S'Earnings/Share'
+p53
+sS'r1'
+p54
+S'Dividend Pay Date'
+p55
+sS'r2'
+p56
+S'P/E (Real-time)'
+p57
+sS'i'
+S'More Info'
+p58
+sS'm'
+S"Day's Range"
+p59
+sS'l'
+S'Last Trade (With Time)'
+p60
+sS'o'
+S'Open'
+p61
+sS'n'
+S'Name'
+p62
+sS'q'
+S'Ex-Dividend Date'
+p63
+sS'p'
+S'Previous Close'
+p64
+sS'r'
+S'P/E Ratio'
+p65
+sS'l2'
+p66
+S'High Limit'
+p67
+sS'l3'
+p68
+S'Low Limit'
+p69
+sS'w'
+S'52-Week Range'
+p70
+sS'l1'
+p71
+S'Last Trade (Price Only)'
+p72
+sS'y'
+S'Dividend Yield'
+p73
+sS'n4'
+p74
+S'Notes'
+p75
+s.

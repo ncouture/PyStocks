@@ -1,0 +1,47 @@
+$Id:$
+
+a2: Average Daily Volume
+a: Ask
+b2: Ask (Real-time)
+b3: Bid (Real-time)
+b: Bid
+c1: Change
+c3: Commission
+c6: Change (Real-time)
+c: Change Percent
+d2: Trade Date
+d: Dividend/Share
+e: Earnings/Share
+g1: Holdings Gain Percent
+g3: Annualized Gain
+g4: Holdings Gain
+g5: Holdings Gain Percent (Real-time)
+g6: Holdings Gain (Real-time)
+i: More Info
+j1: Market Capitalization
+j3: Market Cap (Real-time)
+k1: Last Trade (Real-time With Time)
+k2: Change Percent (Real-time)
+l1: Last Trade (Price Only)
+l2: High Limit
+l3: Low Limit
+l: Last Trade (With Time)
+m2: Day's Range (Real-time)
+m: Day's Range
+n4: Notes
+n: Name
+o: Open
+p1: Price Paid
+p: Previous Close
+q: Ex-Dividend Date
+r1: Dividend Pay Date
+r2: P/E (Real-time)
+r: P/E Ratio
+s1: Shares Owned
+v1: Holdings Value
+v7: Holdings Value (Real-time)
+v: Volume
+w1: Day's Value Change
+w4: Day's Value Change (Real-time)
+w: 52-Week Range
+y: Dividend Yield

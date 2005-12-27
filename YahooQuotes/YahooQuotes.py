@@ -9,113 +9,279 @@ class YahooQuoteFinder:
     """
     Find stocks quotes from Yahoo! Finances.
     """
-    def __init__(self, extended=False, realtime=False):
+    def __init__(self, symbol):
         """
-        If no arguments are specified when initializing the
-        quote finder the following values will be returned as a list:
+        Download stock's attributes and attribute them to this object.
         
-        0 Symbol
-        1 Company Name
-        2 Last Price
-        3 Last Trade Date
-        4 Last Trade Time
-        5 Change
-        6 Percent Change
-        7 Volume
-        8 Average Daily Vol
-        9 Bid
-        10 Ask
-        11 Previous Close
-        12 Today's Open
-        13 Day's Range
-        14 52-Week Range
-        15 Earnings per Share
-        16 P/E Ratio
-        17 Dividend Pay Date
-        18 Dividend per Share
-        19 Dividend Yield
-        20 Market Capitalization
-        21 Stock Exchange
-        
-        If the extended argument is True, the following fields
-        will be retrieved:
-        
-        0 Short ratio
-        1 1yr Target Price
-        2 EPS Est. Current Yr
-        3 EPS Est. Next Year
-        4 EPS Est. Next Quarter
-        5 Price/EPS Est. Current Yr
-        6 Price/EPS Est. Next Yr
-        7 PEG Ratio
-        8 Book Value
-        9 Price/Book
-        10 Price/Sales
-        11 EBITDA
-        12 50-day Moving Avg
-        13 200-day Moving Avg
+        * Basic attributes:
 
-        If the realtime argument is True, the following fields
-        will be retrieved:
+            symbol:       Our symbol
+            company:      Our company name
+            last_price:   Our price per share
+
+            last_trade: (dict)
+                date:     Last trade date
+                time:     Last trade time
         
-        1 Ask (real-time)
-        2 Bid (real-time)
-        3 Change in Percent (real-time)
-        4 Last trade with time (real-time)
-        5 Change (real-time)
-        6 Day range (real-time)
-        7 Market-cap (real-time)
+            change: (dict)
+                cash:     Change in cash
+                percent:  Change in percentage
+                total:    Total volume of shares
+                daily:    Average daily volume
+
+            value: (dict)
+                total:    Company's value (last price * volume)
+                bid:      Bid
+                ask:      Ask
+                p_close:  Previous close price per share
+                l_close:  Last close price per share
+
+            range: (dict)
+                day:      Day's Hi and Low
+                year:     52-Week Hi and Low
+
+            EPS:          Earning Per Share
+            PE:           Price-Earnings Ratio
+
+            dividend: (dict)
+                l_date:   Dividend pay date
+                p_share:  Dividend per share
+                yeild:    Dividend yeild
+        
+            capital:      Market cap (volume * price)
+            exchange:     Exchange name
+
+        * Extended attributes:
+
+            short_ratio:  Short Interest Ratio
+            target_52w:   Targetted price in 52 weeks
+
+            EPS_est: (dict)
+                current_year: Estimated EPS this year
+                next_year:    Estimated EPS next year
+                next_quarter: Estimated EPS next quarter
+
+            price_EPS_est: (dict)
+                current_year: Estimated Price/EPS this year
+                next_year:    Estimated Price/EPS next year
+                next_quarter: Estimated Price/EPS next quarter
+
+            PEG:          Price/Earnings to Growth
+            book_value:   Book value
+            price_book:   Price/Book
+            EBITDA:       EBITDA
+
+            average_move: (dict)
+                d50:      50 days moving average
+                d200:     200 days moving average
+
+        * Real-Time attributes:
+
+            realtime: (dict)
+                ask:      Ask (real-time)
+                bid:      Bid (real-time)
+
+                change: (dict)
+                    percent: Change percentage (real-time)
+                    cash:    Change in money (real-time)
+
+                last_trade: (dict)
+                    date:    Last trade date (real-time)
+                    price:   Last trade price (real-time)
+                day_range:   Day range (real-time)
+                capital:     Market cap (volume * price) (real-time)
+
+        example:
+
+            >>> YHOO = YahooQuoteFinder('YHOO')
+            >>> YHOO.symbol
+            'YHOO'
+            >>> YHOO.realtime['last_trade']['date']
+            'Dec 23'
+            >>>
         """
-        self.url             = "http://quote.yahoo.com/d?f=FORMAT&s="
-        self.format_default  = "snl1d1t1c1p2va2bapomwerr1dyj1x"
-        self.format_extended = "s7t8e7e8e9r6r7r5b4p6p5j4m3m4"
-        self.format_realtime = "b2b3k2k1c6m2j3"
+        format = "snl1d1t1c1p2va2bapomwerr1dyj1xs7"
+        format += "t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3"
+        url = "http://quote.yahoo.com/d?f=" + format
+        url += "&s=" + symbol
 
-        if extended and realtime:
-            raise ValueError("extended and realtime are mutually exclusive")
-        elif extended:
-            self.url = self.url.replace('FORMAT', self.format_extended)
-        elif realtime:
-            self.url = self.url.replace('FORMAT', self.format_realtime)
-        else:
-            self.url = self.url.replace('FORMAT', self.format_default)
+        # download & read csv file
+        try:
+            f = urllib2.urlopen(url)
+            quote = f.read()
+        except urllib2.URLError, e:
+            raise ValueError("An error occured when opening %s" % url)
 
-    def get_quote(self, symbol):
-        """
-        Obtain a stock information by symbol.
-
-        symbol: stock symbol
-        """
-        # postfix our url with the symbol
-        url = self.url + symbol.upper()
-        # obtain csv file
-        f = urllib2.urlopen(url)
-        # read the data into quote
-        quote = f.read()
         # split, strip and replace parts of data obtained
-        results = [f.strip().replace('"', '') for f in quote.split(",")]
-        # return parsed results
-        return results
+        self.data = []
+        for f in quote.split(","):
+            f = f.strip()
+            f = f.replace('"', "")
+            self.data.append(f)
 
-symbol='YHOO'
-# Default Stock Quotes
-StockInfo = YahooQuoteFinder()
-print "=== Default ==="
-for i in StockInfo.get_quote(symbol):
-    print i
-print
 
-# Extended Stock Quotes
-ExtStockInfo = YahooQuoteFinder(extended=True)
-print "=== MSFT Extended ==="
-for i in ExtStockInfo.get_quote(symbol):
-    print i
-print
+        """
+        Basic Attributes
+        """
 
-# Real Time Stocks Quotes
-LiveStockInfo = YahooQuoteFinder(realtime=True)
-print "=== Real Time ==="
-for i in StockInfo.get_quote(symbol):
-    print i
-print
+        (self.symbol, self.company, self.last_price) = self.data[:3]
 
+        # date, time
+        self.last_trade = {'date': self.data[3],
+                           'time': self.data[4]}
+
+        # money change, percent change
+        self.change = {'cash': self.data[5],
+                       'percent': self.data[6]}
+
+        # total volume, average daily volume
+        self.volume = {'total': self.data[7],
+                       'daily': self.data[8]}
+
+        # company value, share bid, share ask,
+        #  previous close, last close
+        self.value = {'total': float(self.last_price
+                                     ) * float(self.volume['total']),
+                      'bid': self.data[9],
+                      'ask': self.data[10],
+                      'p_close': self.data[11],
+                      'l_close': self.data[12]}
+
+        # day range, 52weeks range
+        self.range = {'day': self.data[13],
+                      'year': self.data[14]}
+
+        (self.EPS, self.PE) = (self.data[15], self.data[16])
+
+        # div pay date, div per share, div yeild
+        self.dividend = {'pay_date': self.data[17],
+                         'per_share': self.data[18],
+                         'yeild': self.data[19]}
+
+        (self.capital, self.exchange) = (self.data[20], self.data[21])
+
+        
+        """
+        Extended Attributes
+        """
+
+        (self.short_ratio,
+         self.target_52w) = self.data[22:24]
+        
+        # estimate EPS - current year, next year, next quarter
+        self.EPS_est = {'current_year': self.data[24],
+                        'next_year': self.data[25],
+                        'next_quarter': self.data[26]}
+        
+        # estimate price and EPS
+        self.price_EPS_est = {'current_year': self.data[27],
+                              'next_year': self.data[28],
+                              'next_quarter': self.data[29]}
+
+        (self.PEG,
+         self.book_value,
+         self.price_book,
+         self.price_sales,
+         self.EBITDA) = self.data[29:34]
+
+        self.average_move = {'d50': self.data[34],
+                             'd200': self.data[35]}
+
+
+        """
+        Real-Time Attributes
+        """
+
+        self.realtime = {'ask': self.data[36],
+                         'bid': self.data[37],
+                         'change': {'percent': self.data[38],
+                                    'cash': self.data[40]},
+                         'last_trade': {'date': self.data[39].split(" - ")[0],
+                                        'price': self.data[39].split(" - ")[1]},
+                         'day_range': self.data[41],
+                         'capital': self.data[42]}
+                                                       
+        
+
+if __name__ == "__main__":
+    # Default Stock Quotes
+    import sys
+    
+    if len(sys.argv) != 2:
+        print "Usage: YahooQuote.py <symbol>"
+        sys.exit(1)
+    
+    Stock = YahooQuoteFinder(sys.argv[1])
+
+    """
+    Default
+    """
+    print
+    print "Symbol: %s"             % Stock.symbol
+    print "Company: %s"            % Stock.company
+    print "Last Price: %s"         % Stock.last_price
+    print "Last trade date: %s"    % Stock.last_trade['date']
+    print "Last trade time: %s"    % Stock.last_trade['time']
+    print "Day change: %s"         % Stock.change['cash']
+    print "Day percent change: %s" % Stock.change['percent']
+    print "Total volume: %s"       % Stock.volume['total']
+    print "Daily volume: %s"       % Stock.volume['daily']
+    print "Company value: %s"      % Stock.value['total']
+    print "Bid: %s"                % Stock.value['bid']
+    print "Ask: %s"                % Stock.value['ask']
+    print "Previous close: %s"     % Stock.value['p_close']
+    print "Last close: %s"         % Stock.value['l_close']
+    print "Day range: %s"          % Stock.range['day']
+    print "52W range: %s"          % Stock.range['year']
+    print "Earning Per Share: %s"  % Stock.EPS
+    print "Price / Earning: %s"    % Stock.PE
+    print "Dividend pay date: %s"  % Stock.dividend['pay_date']
+    print "Dividend per share: %s" % Stock.dividend['per_share']
+    print "Dividend yeild: %s"     % Stock.dividend['yeild']
+    print "Capitalization: %s"     % Stock.capital
+    print "Exchange: %s"           % Stock.exchange
+    
+
+    """
+    Extended
+    """
+    raw_input("\nPress any key to see Extended attributes ")
+    print
+    print "Short ratio: %s"           % Stock.short_ratio
+    print "52w target: %s"            % Stock.target_52w
+    print "EPS Est. 1 year: %s"       % Stock.EPS_est['current_year']
+    print "EPS Est. next year: %s"    % Stock.EPS_est['next_year']
+    print "EPS Est. next quarter: %s"      % Stock.EPS_est['next_quarter']
+    print "Price/EPS Est. 1 year: %s" % Stock.price_EPS_est['current_year']
+    print "Price/EPS Est. next year: %s"   % Stock.price_EPS_est['next_year']
+    print "Price/EPS Est. next quater: %s" % (
+        Stock.price_EPS_est['next_quarter'])
+    print "Price/Earnings to Growth: %s"   % Stock.PEG
+    print "Book value: %s"            % Stock.book_value
+    print "Price/Book: %s"            % Stock.price_book
+    print "EBITDA: %s"                % Stock.EBITDA
+    print "50 days moving average: %s"     % Stock.average_move['d50']
+    print "200 days moving average: %s"    % Stock.average_move['d200']
+
+    """
+    Real-Time (after-hours)
+    """
+    raw_input("\nPress any key to see Real-Time attributes ")
+    print
+    print "Ask (real-time): %s"            % Stock.realtime['ask']
+    print "Bid (real-time): %s"            % Stock.realtime['bid']
+    print "Change percent (real-time): %s" % Stock.realtime['change']['percent']
+
+    print "Change in cash (real-time): %s" % (
+        Stock.realtime['change']['cash'])
+
+    print "Last trade date (real-time): %s" % (
+        Stock.realtime['last_trade']['date'])
+    
+    print "Last trade price (real-time): %s" % (
+        Stock.realtime['last_trade']['price'])
+
+    print "Day range (real-time): %s" % Stock.realtime['day_range']
+    print "Market Capitalization: %s" % Stock.realtime['capital']
+    print
+    

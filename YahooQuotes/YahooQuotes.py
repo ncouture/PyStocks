@@ -124,7 +124,6 @@ class YahooQuoteFinder:
         Basic Attributes
         """
 
-        print self.data
         (self.symbol, self.company, self.last_price) = self.data[:3]
 
         # date, time

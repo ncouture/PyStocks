@@ -7,10 +7,51 @@ import re
 
 __revision__ = "$Id$"
 
+class FeedError(Exception):
+    """
+    Feed unavailable error.
+
+    raised when obtaining data from a feed fails.
+    """
+    
+    def __init__(self, msg=''):
+        self.message = msg
+        Exception.__init__(self, msg)
+
+    def __repr__(self):
+        return self.message
+
+    __str__ = __repr__
+
+class SymbolError(Exception):
+    """
+    Symbol invalid error.
+    
+
+    raised when a symbol is not valid.
+    """
+    def __init__(self, msg=''):
+        self.message = msg
+        Exception.__init__(self, msg)
+
+    def __repr__(self):
+        return self.message
+
+    ___str__ = __repr__
+
+def format_number(n):
+    """
+    Convert a number to a string by adding a coma every 3 characters
+    """
+    n = str(n)
+    return ','.join([n[::-1][x:x+3]
+              for x in range(0,len(n),3)])[::-1]
+
 class YahooQuoteFinder:
     """
     Find stocks quotes from Yahoo! Finances.
     """
+    
     def __init__(self, symbol):
         """
         Download stock's attributes and attribute them to this object.
@@ -102,16 +143,18 @@ class YahooQuoteFinder:
             'Dec 23'
             >>>
         """
-        format = "snl1d1t1c1p2va2bapomwerr1dyj1xs7"
-        format += "t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3"
-        url = "http://quote.yahoo.com/d?f=" + format
-        url += "&s=" + symbol
+        self.symbol = symbol
+        
+        # url: 43 attributes in a csv file
+        self.url = "http://quote.yahoo.com/d?f=snl1d1t1c1p2va2bapomwerr1dyj"
+        self.url += "1xs7t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3&s=%s" % symbol
 
-        # download
+        # obtain stocks attributes
         try:
-            f = urllib2.urlopen(url)
+            f = urllib2.urlopen(self.url)
         except urllib2.URLError, e:
-            raise ValueError("An error occured when opening %s" % url)
+            raise FeedError("Could not fetch stocks attributes")
+
 
         # read the csv file, create the list of our attributes
         # and remove unwanted sgml tags
@@ -120,6 +163,12 @@ class YahooQuoteFinder:
         for (pos, item) in enumerate(self.data):
             self.data[pos] = re.sub ('<[^>]*>', '', self.data[pos])
 
+        # If the volume of shares is not available,
+        # it is an invalid symbol
+        if self.data[7] == 'N/A':
+            raise SymbolError("Invalid symbol: %s" % symbol)
+
+        
         """
         Basic Attributes
         """
@@ -204,14 +253,21 @@ class YahooQuoteFinder:
         
 
 if __name__ == "__main__":
-    # Default Stock Quotes
     import sys
     
     if len(sys.argv) != 2:
         print "Usage: YahooQuote.py <symbol>"
         sys.exit(1)
-    
-    Stock = YahooQuoteFinder(sys.argv[1])
+
+    try:
+        Stock = YahooQuoteFinder(sys.argv[1])
+    except FeedError, e:
+        print e
+        sys.exit(1)
+    except SymbolError, e:
+        print e
+        sys.exit(1)
+
 
     """
     Default

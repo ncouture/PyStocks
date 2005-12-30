@@ -2,6 +2,8 @@
 #
 
 import urllib2
+import csv
+import re
 
 __revision__ = "$Id$"
 
@@ -105,25 +107,24 @@ class YahooQuoteFinder:
         url = "http://quote.yahoo.com/d?f=" + format
         url += "&s=" + symbol
 
-        # download & read csv file
+        # download
         try:
             f = urllib2.urlopen(url)
-            quote = f.read()
         except urllib2.URLError, e:
             raise ValueError("An error occured when opening %s" % url)
 
-        # split, strip and replace parts of data obtained
-        self.data = []
-        for f in quote.split(","):
-            f = f.strip()
-            f = f.replace('"', "")
-            self.data.append(f)
-
+        # read the csv file, create the list of our attributes
+        # and remove unwanted sgml tags
+        reader = csv.reader(f)
+        for l in reader: self.data = l
+        for (pos, item) in enumerate(self.data):
+            self.data[pos] = re.sub ('<[^>]*>', '', self.data[pos])
 
         """
         Basic Attributes
         """
 
+        print self.data
         (self.symbol, self.company, self.last_price) = self.data[:3]
 
         # date, time

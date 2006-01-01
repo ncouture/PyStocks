@@ -47,9 +47,139 @@ def format_number(n):
     return ','.join([n[::-1][x:x+3]
               for x in range(0,len(n),3)])[::-1]
 
+class YahooChartFinder:
+    """
+    Find charts of stocks, mutual funds, and market indices.
+    """
+    
+    def __init__(self,
+                 symbol,
+                 range='1d',
+                 type='candle',
+                 size='medium',
+                 scale='log',
+                 indicator='vol',
+                 *symbols):
+        """
+        Find a chart location.
+
+        symbol: stock symbol
+
+        range: Chart time range 
+            1d: 1 day chart  (default)
+            5d: 5 days chart
+            3m: 3 months chart
+            6m: 6 months chart
+            1y: 1 year chart
+            2y: 2 years chart
+            5y: 5 years chart
+            max: longest chart avaiable "my"
+        
+        type: Chart type
+            bar:     bar chart
+            line:    line chart
+            candle:  candle chart  (default)
+
+        size: Chart size
+            small:  Small sized chart
+            medium: Medium sized chart  (default)
+            large:  Large sized type
+
+        scale: Chart type of y-axis
+            log:    logarithmic y-axis  (default)
+            linear: linear y-axis
+    
+        indicator: Chart technical indicator
+            macd:   Moving Average Convergence/Divergence
+            mfi:    Money Flow Index
+            roc:    Rate Of Change
+            rsi:    Relative Strength Index
+            vol:    Number of shares  (default)
+            mavol:  Number of shares transacted every day
+            stoch_s:  Stochastic indicator (slow)
+            stoch_f:  Stochastic indicator (fast)
+            will:   William indicator
+
+            The previous indicators are all documented at
+            http://help.yahoo.com/help/us/fin/chart/chart-12.html.
+
+        symbols: List of simbols to compare with our symbol.
+
+        Example:
+
+            >>> from YahooFinance import YahooChartFinder
+            >>> chart = YahooChartFinder('YHOO')
+            >>> chart
+            http://ichart.finance.yahoo.com/z?s=YHOO&t=1d&q=c&l=on&z=m&a=v&p=s
+            >>> (chart.size, chart.range, chart.type, chart.indicator
+            ... ) = ('large', '1y', 'line', 'macd')
+            >>> chart
+            http://ichart.finance.yahoo.com/z?s=YHOO&t=1y&q=l&l=on&z=l&a=m&p=s
+            >>> chart.symbols = ['GOOG', 'RHAT']
+            >>> chart
+            http://ichart.finance.yahoo.com/z?s=YHOO&t=1y&q=l&l=on&z=l&a=m&c=GOOG,RHAT&p=s
+            >>>
+        """
+        self.symbol  = symbol
+        self.range   = range; del range
+        self.type    = type; del type
+        self.size    = size
+        self.scale   = scale
+        self.indicator = indicator
+        self.symbols = symbols
+
+        self._times =  ('1d', '5d', '3m',
+                        '6m', '1y', '2y',
+                        '5y', 'max')
+        self._types =  ('bar', 'line', 'candle')
+        self._sizes =  ('small', 'medium', 'large')
+        self._scales = ('log', 'linear')
+        self._indic_vars = {'macd':    'm',
+                            'mfi':     'f',
+                            'roc':     'p',
+                            'rsi':     'r',
+                            'vol':     'v',
+                            'stoch_s': 'ss',
+                            'stoch_f': 'fs',
+                            'will':    'w'
+        }; self._validate_args()
+
+        self._build_url() # creates self.url
+        
+    def _build_url(self):
+        url = "http://ichart.finance.yahoo.com/z?s=%s" % self.symbol
+        url += "&t=" + self.range
+        url += "&q=" + self.type[0]
+        url += "&l=on" # UNKNOWN VARIABLE `l'
+        url += "&z=" + self.size[0]
+        url += "&a=" + self._indic_vars[self.indicator]
+        if self.symbols: 
+            symbols = ",".join(self.symbols)
+            url += "&c=" + symbols
+        url += "&p=s"  # UNKNOWN VARIABLE `p'
+        self.url = url
+
+    def _validate_args(self):
+        if self.range not in self._times:
+            raise ValueError("Invalid range: %s" % self.range)
+        if self.type not in self._types:
+            raise ValueError("Invalid type: %s" % self.type)
+        if self.size not in self._sizes:
+            raise ValueError("Invalid size: %s" % self.size)
+        if self.scale not in self._scales:
+            raise ValueError("Invalid scale: %s" % self.scale)
+        if self.indicator not in self._indic_vars.keys():
+            raise ValueError("Invalid indicator: %s" % self.indicator)
+
+    def __repr__(self):
+        self._build_url()
+        return self.url
+
+    __str__ = __repr__
+        
 class YahooQuoteFinder:
     """
-    Find stocks quotes from Yahoo! Finances.
+    Find stocks quotes from over 50 worldwide exanges.
     """
     
     def __init__(self, symbol):
@@ -58,9 +188,9 @@ class YahooQuoteFinder:
         
         * Basic attributes:
 
-            symbol:       Our symbol
-            company:      Our company name
-            last_price:   Our price per share
+            symbol:       symbol
+            company:      company name
+            last_price:   price per share
 
             last_trade: (dict)
                 date:     Last trade date
@@ -134,7 +264,7 @@ class YahooQuoteFinder:
                 day_range:   Day range (real-time)
                 capital:     Market cap (volume * price) (real-time)
 
-        example:
+        Example:
 
             >>> YHOO = YahooQuoteFinder('YHOO')
             >>> YHOO.symbol
@@ -249,6 +379,4 @@ class YahooQuoteFinder:
                                         'price': self.data[39].split(" - ")[1]},
                          'day_range': self.data[41],
                          'capital': self.data[42]}
-
-
 

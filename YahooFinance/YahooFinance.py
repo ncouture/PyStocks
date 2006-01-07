@@ -199,11 +199,12 @@ class YahooQuoteFinder:
             change: (dict)
                 cash:     Change in cash
                 percent:  Change in percentage
-                total:    Total volume of shares
-                daily:    Average daily volume
+
+            volume: (dict)
+                daily:    Volume of shares traded
+                average:  Average daily volume (3 months)
 
             value: (dict)
-                total:    Company's value (last price * volume)
                 bid:      Bid
                 ask:      Ask
                 p_close:  Previous close price per share
@@ -314,14 +315,12 @@ class YahooQuoteFinder:
                        'percent': self.data[6]}
 
         # total volume, average daily volume
-        self.volume = {'total': self.data[7],
-                       'daily': self.data[8]}
+        self.volume = {'daily': self.data[7],
+                       'average': self.data[8]}
 
         # company value, share bid, share ask,
         #  previous close, last close
-        self.value = {'total': float(self.last_price
-                                     ) * float(self.volume['total']),
-                      'bid': self.data[9],
+        self.value = {'bid': self.data[9],
                       'ask': self.data[10],
                       'p_close': self.data[11],
                       'l_close': self.data[12]}

@@ -43,6 +43,8 @@ def format_number(n):
     """
     Convert a number to a string by adding a coma every 3 characters
     """
+    if int(n) < 0:
+        raise ValueError("positive integer expected")
     n = str(n)
     return ','.join([n[::-1][x:x+3]
               for x in range(0,len(n),3)])[::-1]
@@ -80,15 +82,15 @@ class YahooChartFinder:
             line:    line chart
             candle:  candle chart  (default)
 
+        scale: Chart type of y-axis
+            log:    logarithmic y-axis  (default)
+            linear: linear y-axis
+    
         size: Chart size
             small:  Small sized chart
             medium: Medium sized chart  (default)
             large:  Large sized type
 
-        scale: Chart type of y-axis
-            log:    logarithmic y-axis  (default)
-            linear: linear y-axis
-    
         indicator: Chart technical indicator
             macd:   Moving Average Convergence/Divergence
             mfi:    Money Flow Index
@@ -102,6 +104,19 @@ class YahooChartFinder:
 
             The previous indicators are all documented at
             http://help.yahoo.com/help/us/fin/chart/chart-12.html.
+
+        overlays: Chart attributes overlays
+            boll: Bollinger Band
+                      A band plotted two standard deviations
+                      away from a simple moving average
+            para: Parabolic SAR
+                      A band that uses a trailing stop and
+                      reverse method to determine good exit
+                      and entry points
+            split: Stock splits
+                      A stock split indicator
+            vol: Volume
+                      Bands, volume indicator
 
         symbols: List of simbols to compare with our symbol.
 

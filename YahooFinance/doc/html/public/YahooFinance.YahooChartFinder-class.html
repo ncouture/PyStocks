@@ -53,8 +53,8 @@ Find charts of stocks, mutual funds, and market indices.
           <span class=summary-sig-arg>type</span>,
           <span class=summary-sig-arg>size</span>,
           <span class=summary-sig-arg>scale</span>,
-          <span class=summary-sig-arg>indicator</span>,
-          <span class="summary-sig-vararg">*symbols</span>)</span></code>
+          <span class="summary-sig-vararg">*symbols</span>,
+          <span class="summary-sig-kwarg">**attrs</span>)</span></code>
 <br />
 Find a chart location.</td></tr>
 <tr><td align="right" valign="top" width="15%"><font size="-1">&nbsp;</font></td>
@@ -76,12 +76,12 @@ Find a chart location.</td></tr>
 <table width="100%" class="func-details" bgcolor="#e0e0e0"><tr><td>
   <h3><span class="sig"><span class="sig-name">__init__</span>(<span class=sig-arg>self</span>,
           <span class=sig-arg>symbol</span>,
-          <span class=sig-arg>range</span>=<span class=sig-default>'1d'</span>,
-          <span class=sig-arg>type</span>=<span class=sig-default>'candle'</span>,
-          <span class=sig-arg>size</span>=<span class=sig-default>'medium'</span>,
-          <span class=sig-arg>scale</span>=<span class=sig-default>'log'</span>,
-          <span class=sig-arg>indicator</span>=<span class=sig-default>'vol'</span>,
-          <span class="sig-vararg">*symbols</span>)</span>
+          <span class=sig-arg>range</span>,
+          <span class=sig-arg>type</span>,
+          <span class=sig-arg>size</span>,
+          <span class=sig-arg>scale</span>,
+          <span class="sig-vararg">*symbols</span>,
+          <span class="sig-kwarg">**attrs</span>)</span>
     <br /><i>(Constructor)</i>
   </h3>
 <pre class="literalblock">
@@ -90,35 +90,39 @@ Find a chart location.
 symbol: stock symbol
 
 range: Chart time range 
-    1d: 1 day chart  (default)
+    1d: 1 day chart
     5d: 5 days chart
     3m: 3 months chart
     6m: 6 months chart
     1y: 1 year chart
     2y: 2 years chart
     5y: 5 years chart
-    max: longest chart avaiable &quot;my&quot;
+    max: longest chart avaiable
 
 type: Chart type
     bar:     bar chart
     line:    line chart
-    candle:  candle chart  (default)
+    candle:  candle chart
+
+scale: Chart type of y-axis
+    log:    logarithmic y-axis
+    linear: linear y-axis
 
 size: Chart size
     small:  Small sized chart
-    medium: Medium sized chart  (default)
+    medium: Medium sized chart
     large:  Large sized type
 
-scale: Chart type of y-axis
-    log:    logarithmic y-axis  (default)
-    linear: linear y-axis
+symbols: List of simbols to compare with our symbol.
 
-indicator: Chart technical indicator
+attrs: Chart technical Indicators &amp; Overlays
+
+  Indicators:
     macd:   Moving Average Convergence/Divergence
     mfi:    Money Flow Index
     roc:    Rate Of Change
     rsi:    Relative Strength Index
-    vol:    Number of shares  (default)
+    avol:   Number of shares
     mavol:  Number of shares transacted every day
     stoch_s:  Stochastic indicator (slow)
     stoch_f:  Stochastic indicator (fast)
@@ -127,22 +131,30 @@ indicator: Chart technical indicator
     The previous indicators are all documented at
     http://help.yahoo.com/help/us/fin/chart/chart-12.html.
 
-symbols: List of simbols to compare with our symbol.
+  Overlays:
+    boll:  Bollinger Band
+    para:  Parabolic SAR
+    split: Stock splits
+    ovol:  Volume
+    m5:    Moving average (5 days)
+    m10:   Moving average (10 days)
+    m20:   Moving average (20 days)
+    m50:   Moving average (50 days)
+    m100:  Moving average (100 days)
+    m200:  Moving average (200 days)
+    e5:    Exponential moving average (5 days)
+    e10:   Exponential moving average (10 days)
+    e20:   Exponential moving average (20 days)
+    e50:   Exponential moving average (50 days)
+    e100:  Exponential moving average (100 days)
+    e200:  Exponential moving average (200 days)
 
 Example:
 
-    &gt;&gt;&gt; from YahooFinance import YahooChartFinder
-    &gt;&gt;&gt; chart = YahooChartFinder('YHOO')
+    &gt;&gt;&gt; chart = YahooChartFinder('YHOO', '1d',
+    ... 'candle', 'large', 'log')
     &gt;&gt;&gt; chart
-    http://ichart.finance.yahoo.com/z?s=YHOO&amp;t=1d&amp;q=c&amp;l=on&amp;z=m&amp;a=v&amp;p=s
-    &gt;&gt;&gt; (chart.size, chart.range, chart.type, chart.indicator
-    ... ) = ('large', '1y', 'line', 'macd')
-    &gt;&gt;&gt; chart
-    http://ichart.finance.yahoo.com/z?s=YHOO&amp;t=1y&amp;q=l&amp;l=on&amp;z=l&amp;a=m&amp;p=s
-    &gt;&gt;&gt; chart.symbols = ['GOOG', 'RHAT']
-    &gt;&gt;&gt; chart
-    http://ichart.finance.yahoo.com/z?s=YHOO&amp;t=1y&amp;q=l&amp;l=on&amp;z=l&amp;a=m&amp;c=GOOG,RHAT&amp;p=s
-    &gt;&gt;&gt;
+    http://ichart.finance.yahoo.com/z?s=YHOO&amp;t=1d&amp;q=c&amp;l=on&amp;z=l&amp;a=&amp;p=
 </pre>
   <dl><dt></dt><dd>
   </dd></dl>
@@ -163,7 +175,7 @@ Example:
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
   <tr>
-    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Sun Jan  1 18:04:51 2006</font></td>
+    <td align="left"><font size="-2">Generated by Epydoc 2.1 on Sun Jan  8 18:13:39 2006</font></td>
     <td align="right"><a href="http://epydoc.sourceforge.net"
                       ><font size="-2">http://epydoc.sf.net</font></a></td>
   </tr>

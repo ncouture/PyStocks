@@ -53,50 +53,53 @@ class YahooChartFinder:
     """
     Find charts of stocks, mutual funds, and market indices.
     """
-    
     def __init__(self,
                  symbol,
-                 range='1d',
-                 type='candle',
-                 size='medium',
-                 scale='log',
-                 indicator='vol',
-                 *symbols):
+                 range,
+                 type,
+                 size,
+                 scale,
+                 *symbols,
+                 **attrs):
         """
         Find a chart location.
 
         symbol: stock symbol
 
         range: Chart time range 
-            1d: 1 day chart  (default)
+            1d: 1 day chart
             5d: 5 days chart
             3m: 3 months chart
             6m: 6 months chart
             1y: 1 year chart
             2y: 2 years chart
             5y: 5 years chart
-            max: longest chart avaiable "my"
+            max: longest chart avaiable
         
         type: Chart type
             bar:     bar chart
             line:    line chart
-            candle:  candle chart  (default)
+            candle:  candle chart
 
         scale: Chart type of y-axis
-            log:    logarithmic y-axis  (default)
+            log:    logarithmic y-axis
             linear: linear y-axis
     
         size: Chart size
             small:  Small sized chart
-            medium: Medium sized chart  (default)
+            medium: Medium sized chart
             large:  Large sized type
 
-        indicator: Chart technical indicator
+        symbols: List of simbols to compare with our symbol.
+
+        attrs: Chart technical Indicators & Overlays
+
+          Indicators:
             macd:   Moving Average Convergence/Divergence
             mfi:    Money Flow Index
             roc:    Rate Of Change
             rsi:    Relative Strength Index
-            vol:    Number of shares  (default)
+            avol:   Number of shares
             mavol:  Number of shares transacted every day
             stoch_s:  Stochastic indicator (slow)
             stoch_f:  Stochastic indicator (fast)
@@ -105,43 +108,38 @@ class YahooChartFinder:
             The previous indicators are all documented at
             http://help.yahoo.com/help/us/fin/chart/chart-12.html.
 
-        overlays: Chart attributes overlays
-            boll: Bollinger Band
-                      A band plotted two standard deviations
-                      away from a simple moving average
-            para: Parabolic SAR
-                      A band that uses a trailing stop and
-                      reverse method to determine good exit
-                      and entry points
+          Overlays:
+            boll:  Bollinger Band
+            para:  Parabolic SAR
             split: Stock splits
-                      A stock split indicator
-            vol: Volume
-                      Bands, volume indicator
-
-        symbols: List of simbols to compare with our symbol.
+            ovol:  Volume
+            m5:    Moving average (5 days)
+            m10:   Moving average (10 days)
+            m20:   Moving average (20 days)
+            m50:   Moving average (50 days)
+            m100:  Moving average (100 days)
+            m200:  Moving average (200 days)
+            e5:    Exponential moving average (5 days)
+            e10:   Exponential moving average (10 days)
+            e20:   Exponential moving average (20 days)
+            e50:   Exponential moving average (50 days)
+            e100:  Exponential moving average (100 days)
+            e200:  Exponential moving average (200 days)
 
         Example:
 
-            >>> from YahooFinance import YahooChartFinder
-            >>> chart = YahooChartFinder('YHOO')
+            >>> chart = YahooChartFinder('YHOO', '1d',
+            ... 'candle', 'large', 'log')
             >>> chart
-            http://ichart.finance.yahoo.com/z?s=YHOO&t=1d&q=c&l=on&z=m&a=v&p=s
-            >>> (chart.size, chart.range, chart.type, chart.indicator
-            ... ) = ('large', '1y', 'line', 'macd')
-            >>> chart
-            http://ichart.finance.yahoo.com/z?s=YHOO&t=1y&q=l&l=on&z=l&a=m&p=s
-            >>> chart.symbols = ['GOOG', 'RHAT']
-            >>> chart
-            http://ichart.finance.yahoo.com/z?s=YHOO&t=1y&q=l&l=on&z=l&a=m&c=GOOG,RHAT&p=s
-            >>>
+            http://ichart.finance.yahoo.com/z?s=YHOO&t=1d&q=c&l=on&z=l&a=&p=
         """
         self.symbol  = symbol
         self.range   = range; del range
         self.type    = type; del type
         self.size    = size
         self.scale   = scale
-        self.indicator = indicator
         self.symbols = symbols
+        self.attrs   = attrs
 
         self._times =  ('1d', '5d', '3m',
                         '6m', '1y', '2y',
@@ -149,30 +147,64 @@ class YahooChartFinder:
         self._types =  ('bar', 'line', 'candle')
         self._sizes =  ('small', 'medium', 'large')
         self._scales = ('log', 'linear')
-        self._indic_vars = {'macd':    'm',
-                            'mfi':     'f',
-                            'roc':     'p',
-                            'rsi':     'r',
-                            'vol':     'v',
-                            'stoch_s': 'ss',
-                            'stoch_f': 'fs',
-                            'will':    'w'
-        }; self._validate_args()
+        self._indicators = {
+            'macd':    'm',
+            'mfi':     'f',
+            'roc':     'p',
+            'rsi':     'r',
+            'avol':    'v',
+            'stoch_s': 'ss',
+            'stoch_f': 'fs',
+            'will':    'w'
+        }
+        self._overlays = {
+            'boll':    'b',
+            'para':    'p',
+            'split':   's',
+            'ovol':    'v',
+            'm5':      'm5',
+            'm10':     'm10',
+            'm20':     'm20',
+            'm50':     'm50',
+            'm100':    'm100',
+            'm200':    'm200',
+            'e5':      'e5',
+            'e10':     'e10',
+            'e20':     'e20',
+            'e50':     'e50',
+            'e100':    'e100',
+            'e200':    'e200',
+        }
 
-        self._build_url() # creates self.url
+        self._validate_args()
         
     def _build_url(self):
+        overlays = []
+        indicators = []
+        for key in self.attrs:
+            if key in self._overlays:
+                overlays.append(self._overlays[key])
+            elif key in self._indicators:
+                indicators.append(self._indicators[key])
+            else:
+                raise ValueError("Invalid attribute: %s" % key)
+
+        if len(overlays) > 4:
+            raise ValueError("Maximum amount of image overlays is four.")
+        elif len(indicators) > 4:
+            raise ValueError("Maximum amount of indicators is four.")
+
         url = "http://ichart.finance.yahoo.com/z?s=%s" % self.symbol
         url += "&t=" + self.range
         url += "&q=" + self.type[0]
         url += "&l=on" # UNKNOWN VARIABLE `l'
         url += "&z=" + self.size[0]
-        url += "&a=" + self._indic_vars[self.indicator]
-        if self.symbols: 
-            symbols = ",".join(self.symbols)
-            url += "&c=" + symbols
-        url += "&p=s"  # UNKNOWN VARIABLE `p'
-        self.url = url
+        url += "&a=" + ",".join(indicators)
+        if self.symbols:
+            url += "&c=" + ",".join(self.symbols)
+        url += "&p=" + ",".join(overlays)
+
+        return url
 
     def _validate_args(self):
         if self.range not in self._times:
@@ -183,12 +215,15 @@ class YahooChartFinder:
             raise ValueError("Invalid size: %s" % self.size)
         if self.scale not in self._scales:
             raise ValueError("Invalid scale: %s" % self.scale)
-        if self.indicator not in self._indic_vars.keys():
-            raise ValueError("Invalid indicator: %s" % self.indicator)
 
+        # attributes must be indicators or overlays
+        for key in self.attrs:
+            if (key not in self._indicators
+                ) and (key not in self._overlays):
+                raise ValueError("Invalid attribute: %s" % key)
+        
     def __repr__(self):
-        self._build_url()
-        return self.url
+        return self._build_url()
 
     __str__ = __repr__
         
@@ -196,7 +231,7 @@ class YahooQuoteFinder:
     """
     Find stocks quotes from over 50 worldwide exanges.
     """
-    
+
     def __init__(self, symbol):
         """
         Download stock's attributes and attribute them to this object.
@@ -322,34 +357,46 @@ class YahooQuoteFinder:
         (self.symbol, self.company, self.last_price) = self.data[:3]
 
         # date, time
-        self.last_trade = {'date': self.data[3],
-                           'time': self.data[4]}
+        self.last_trade = {
+            'date': self.data[3],
+            'time': self.data[4]
+        }
 
         # money change, percent change
-        self.change = {'cash': self.data[5],
-                       'percent': self.data[6]}
+        self.change = {
+            'cash': self.data[5],
+            'percent': self.data[6]
+        }
 
         # total volume, average daily volume
-        self.volume = {'daily': self.data[7],
-                       'average': self.data[8]}
+        self.volume = {
+            'daily': self.data[7],
+            'average': self.data[8]
+        }
 
         # company value, share bid, share ask,
         #  previous close, last close
-        self.value = {'bid': self.data[9],
-                      'ask': self.data[10],
-                      'p_close': self.data[11],
-                      'l_close': self.data[12]}
+        self.value = {
+            'bid': self.data[9],
+            'ask': self.data[10],
+            'p_close': self.data[11],
+            'l_close': self.data[12]
+        }
 
         # day range, 52weeks range
-        self.range = {'day': self.data[13],
-                      'year': self.data[14]}
+        self.range = {
+            'day': self.data[13],
+            'year': self.data[14]
+        }
 
         (self.EPS, self.PE) = (self.data[15], self.data[16])
 
         # div pay date, div per share, div yeild
-        self.dividend = {'pay_date': self.data[17],
-                         'per_share': self.data[18],
-                         'yeild': self.data[19]}
+        self.dividend = {
+            'pay_date': self.data[17],
+            'per_share': self.data[18],
+            'yeild': self.data[19]
+        }
 
         (self.capital, self.exchange) = (self.data[20], self.data[21])
 
@@ -362,14 +409,18 @@ class YahooQuoteFinder:
          self.target_52w) = self.data[22:24]
         
         # estimate EPS - current year, next year, next quarter
-        self.EPS_est = {'current_year': self.data[24],
-                        'next_year': self.data[25],
-                        'next_quarter': self.data[26]}
+        self.EPS_est = {
+            'current_year': self.data[24],
+            'next_year': self.data[25],
+            'next_quarter': self.data[26]
+        }
         
         # estimate price and EPS
-        self.price_EPS_est = {'current_year': self.data[27],
-                              'next_year': self.data[28],
-                              'next_quarter': self.data[29]}
+        self.price_EPS_est = {
+            'current_year': self.data[27],
+            'next_year': self.data[28],
+            'next_quarter': self.data[29]
+        }
 
         (self.PEG,
          self.book_value,
@@ -377,20 +428,26 @@ class YahooQuoteFinder:
          self.price_sales,
          self.EBITDA) = self.data[29:34]
 
-        self.average_move = {'d50': self.data[34],
-                             'd200': self.data[35]}
+        self.average_move = {
+            'd50': self.data[34],
+            'd200': self.data[35]
+        }
 
 
         """
         Real-Time Attributes
         """
 
-        self.realtime = {'ask': self.data[36],
-                         'bid': self.data[37],
-                         'change': {'percent': self.data[38],
-                                    'cash': self.data[40]},
-                         'last_trade': {'date': self.data[39].split(" - ")[0],
-                                        'price': self.data[39].split(" - ")[1]},
-                         'day_range': self.data[41],
-                         'capital': self.data[42]}
+        self.realtime = {
+            'ask': self.data[36],
+            'bid': self.data[37],
+            'change': {'percent': self.data[38],
+                       'cash': self.data[40]
+                       },
+            'last_trade': {'date': self.data[39].split(" - ")[0],
+                           'price': self.data[39].split(" - ")[1]
+                           },
+            'day_range': self.data[41],
+            'capital': self.data[42]
+        }
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-#
 
-from YahooFinance import YahooQuoteFinder
+
+from YahooFinance import YahooQuoteFinder, FeedError, SymbolError
 
 Stock = YahooQuoteFinder('YHOO')
 
@@ -14,12 +14,12 @@ if len(sys.argv) != 2:
 try:
     Stock = YahooQuoteFinder(sys.argv[1])
 
-# Unable to obtain data from feed
+#Unable to obtain data from feed
 except FeedError, e: 
     print e
     sys.exit(1)
 
-# Unable to lookup symbol
+#Unable to lookup symbol
 except SymbolError, e:
     print e
     sys.exit(1)
@@ -28,6 +28,7 @@ except SymbolError, e:
 """
 Basic Atributes
 """
+
 print
 print "Symbol: %s"             % Stock.symbol
 print "Company: %s"            % Stock.company
@@ -36,9 +37,9 @@ print "Last trade date: %s"    % Stock.last_trade['date']
 print "Last trade time: %s"    % Stock.last_trade['time']
 print "Day change: %s"         % Stock.change['cash']
 print "Day percent change: %s" % Stock.change['percent']
-print "Total volume: %s"       % Stock.volume['total']
+print "Total volume: %s"       % Stock.volume['average']
 print "Daily volume: %s"       % Stock.volume['daily']
-print "Company value: %s"      % Stock.value['total']
+print "Company value: %s"      % Stock.volume['average']
 print "Bid: %s"                % Stock.value['bid']
 print "Ask: %s"                % Stock.value['ask']
 print "Previous close: %s"     % Stock.value['p_close']

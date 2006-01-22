@@ -441,7 +441,7 @@ class YahooQuoteFinder:
         self.realtime = {
             'ask': self.data[36],
             'bid': self.data[37],
-            'change': {'percent': self.data[38],
+            'change': {'percent': self.data[38].split(" - ")[1],
                        'cash': self.data[40]
                        },
             'last_trade': {'date': self.data[39].split(" - ")[0],

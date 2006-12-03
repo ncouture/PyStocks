@@ -1,10 +1,12 @@
 #!/usr/bin/env python
+# $Id:$
+#
 
 from distutils.core import setup
 import os
 
 setup(name='pystocks',
-      version='0.1',
+      version='developement',
       description='Python Stocks Interfaces',
       author='Nicolas Couture',
       author_email='nicolas@stormvault.net',

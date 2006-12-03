@@ -1,11 +1,13 @@
 #!/usr/bin/env python
+# Author: Nicolas Couture (pystocks@stormvault.net)
+# http://pystocks.berlios.de/
 #
 
 import urllib2
 import csv
 import re
 
-__revision__ = "$Id: YahooFinance.py 7 2005-12-31 00:09:06Z nicolascouture $"
+__revision__ = "$Id:$"
 
 class FeedError(Exception):
     """

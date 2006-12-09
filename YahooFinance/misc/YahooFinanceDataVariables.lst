@@ -78,3 +78,6 @@ P/E (Real-time)                   r2
 After Hours Change (Real-time)    c8
 Order Book (Real-time)            i5
 Stock Exchange                    x
+Float (free float) Shares	  f6
+Outstanding Shares		  j2
+

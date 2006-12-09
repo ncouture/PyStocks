@@ -102,3 +102,11 @@ print "Day range (real-time): %s" % stock.realtime['day_range']
 print "Market Capitalization: %s" % stock.realtime['capital']
 print
     
+"""
+Fundamental information
+"""
+
+print "Oustanding shares:", stock.outstanding
+print "Floating shares:", stock.float
+print "Restricted shares:", stock.restricted
+

@@ -240,8 +240,9 @@ class YahooQuoteFinder:
 
             dividend: (dict)
                 l_date:   Dividend pay date
-                p_share:  Dividend per share
-                yeild:    Dividend yeild
+                p_share:  Dividend paid per share
+                yeild:    Dividend yeild percentage
+                previous: Previous dividend date
         
             capital:      Market cap (volume * price)
             exchange:     Exchange name
@@ -303,9 +304,9 @@ class YahooQuoteFinder:
         """
         self.symbol = symbol
         
-        # request of 43 stock & quotation attributes
+        # request of 44 stock & quotation attributes
         self.url = ("http://quote.yahoo.com/d?f=snl1d1t1c1p2va2bapomwerr1dyj"
-                    "1xs7t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3&s=%s" %
+                    "1xs7t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3q&s=%s" %
                     symbol)
 
         try:
@@ -376,7 +377,8 @@ class YahooQuoteFinder:
         self.dividend = {
             'pay_date': self.data[17],
             'per_share': self.data[18],
-            'yeild': self.data[19]
+            'yeild': self.data[19],
+            'previous': self.data[43]
         }
 
         (self.capital, self.exchange) = (self.data[20], self.data[21])

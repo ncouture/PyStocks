@@ -1,0 +1,17 @@
+: TODO
+
+Sat Dec  9 15:51:48 EST 2006
+
+ * PyStocks
+   - Restructure the repository to use a main __init__.py file that contains
+     common exceptions, reference to all of the project's interfaces and
+     provide misc methodes that does not fit anywhere else.
+
+ * PortfolioManager
+   - Add support for pysqlite without depending on it. I will want to use cPickle
+      storage methode when there is no 3rd party applications like pysqlite.
+
+ * YahooFinance.YahooQuoteFinder
+   - Enforce data types on all attributes and unit test.
+
+

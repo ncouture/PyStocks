@@ -1,0 +1,21 @@
+: CHANGES
+
+Sat Dec  9 15:51:23 EST 2006
+
+ * YahooFinance.YahooQuoteFinder
+   - Daily, Yearly ranges are now split in two values by a dictionary ('hi' and 'low).
+      this allows easy access of one or another quote.range["daily"]["hi"].
+
+   - Addition of two new attributes and a new category of attributes. The fundamentals 
+      "outstanding", "float" (free float) and "restricted" amount of shares can now be obtained
+      through YahooQuoteFinder.
+
+ * PortfolioManager
+   - A new interface has been created to manage batches of stocks ('buy' transactions).
+      It is very limited but useful to anyone who does not require more than fluctuation
+      reports from an interface that allows them to log fictive buy/sell transactions of
+      securities on multiple stock exchanges. It uses YahooQuoteFinder as his quotation
+      service but has been designed to support other stock exchange feeds easily.
+
+      This is the primary item I will be improving in pystocks; I am hoping to release
+      PyStocks-0.2 when I will be satisfied with it.

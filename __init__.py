@@ -1,7 +1,25 @@
 #!/usr/bin/python
 #
 
-__revision__ = "$Id:$"
+__revision__ = "$Id$"
+
+class FeedError(Exception):
+    """
+    Feed unavailable error.
+
+    raised when obtaining data from a feed fails.
+    """
+    pass
+
+class SymbolError(Exception):
+    """
+    Symbol invalid error.
+    
+
+    raised when a symbol is not valid.
+    """
+    pass
+
 
 def format_number(n):
     """

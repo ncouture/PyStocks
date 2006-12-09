@@ -239,8 +239,9 @@ class YahooQuoteFinder:
             PE:           Price-Earnings Ratio
 
             dividend: (dict)
-                l_date:   Dividend pay date
-                p_share:  Dividend paid per share
+                price:    Historical price from dividend's pay date
+                pay_date:   Dividend pay date
+                per_share:  Dividend paid per share
                 yeild:    Dividend yeild percentage
                 previous: Previous dividend date
         
@@ -378,8 +379,19 @@ class YahooQuoteFinder:
             'pay_date': self.data[17],
             'per_share': self.data[18],
             'yeild': self.data[19],
-            'previous': self.data[43]
+            'previous': self.data[43],
+            'value': None
         }
+        # We might be able to calculate the historical price
+        # if there isn't a variable set to 'N/A'. If we can't
+        # obtain it, we'll set the value to 'N/A' as well.
+        try:
+            value = (float(self.dividend["per_share"]) * 100 /
+                     float(self.dividend["yeild"]))
+        except TypeError:
+            value = 'N/A'
+        self.dividend['value'] = value
+
 
         (self.capital, self.exchange) = (self.data[20], self.data[21])
 

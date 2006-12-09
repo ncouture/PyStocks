@@ -10,51 +10,16 @@ import re
 __revision__ = "$Id$"
 
 class FeedError(Exception):
-    """
-    Feed unavailable error.
-
-    raised when obtaining data from a feed fails.
-    """
-    
-    def __init__(self, msg=''):
-        self.message = msg
-        Exception.__init__(self, msg)
-
-    def __repr__(self):
-        return self.message
-
-    __str__ = __repr__
+    pass
 
 class SymbolError(Exception):
-    """
-    Symbol invalid error.
-    
-
-    raised when a symbol is not valid.
-    """
-    def __init__(self, msg=''):
-        self.message = msg
-        Exception.__init__(self, msg)
-
-    def __repr__(self):
-        return self.message
-
-    ___str__ = __repr__
-
-def format_number(n):
-    """
-    Convert a number to a string by adding a coma every 3 characters
-    """
-    if int(n) < 0:
-        raise ValueError("positive integer expected")
-    n = str(n)
-    return ','.join([n[::-1][x:x+3]
-              for x in range(0,len(n),3)])[::-1]
+    pass
 
 class YahooChartFinder:
     """
     Find charts of stocks, mutual funds, and market indices.
     """
+
     def __init__(self,
                  symbol,
                  range,
@@ -263,8 +228,12 @@ class YahooQuoteFinder:
                 l_close:  Last close price per share
 
             range: (dict)
-                day:      Day's Hi and Low
-                year:     52-Week Hi and Low
+                day (dict): Day's Hi and Low
+                    hi: highest price
+                    low: lowest price
+                year (dict): 52-Week Hi and Low
+                    hi: highest price
+                    low: lowest price
 
             EPS:          Earning Per Share
             PE:           Price-Earnings Ratio
@@ -317,6 +286,12 @@ class YahooQuoteFinder:
                 day_range:   Day range (real-time)
                 capital:     Market cap (volume * price) (real-time)
 
+        * Fundamental attributes:
+
+            outstanding: amount of outstanding shares
+            restricted: amount of shares not on the market
+            float: amount of shares on the market
+
         Example:
 
             >>> YHOO = YahooQuoteFinder('YHOO')
@@ -328,11 +303,11 @@ class YahooQuoteFinder:
         """
         self.symbol = symbol
         
-        # url: 43 attributes in a csv file
-        self.url = "http://quote.yahoo.com/d?f=snl1d1t1c1p2va2bapomwerr1dyj"
-        self.url += "1xs7t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3&s=%s" % symbol
+        # request of 43 stock & quotation attributes
+        self.url = ("http://quote.yahoo.com/d?f=snl1d1t1c1p2va2bapomwerr1dyj"
+                    "1xs7t8e7e8e9r6r7r5b4p6p5j4m3m4b2b3k2k1c6m2j3&s=%s" %
+                    symbol)
 
-        # obtain stocks attributes
         try:
             f = urllib2.urlopen(self.url)
         except urllib2.URLError, e:
@@ -387,10 +362,14 @@ class YahooQuoteFinder:
 
         # day range, 52weeks range
         self.range = {
-            'day': self.data[13],
-            'year': self.data[14]
+            'day': {'hi': self.data[13].split(' - ')[1],
+                    'low': self.data[13].split(' - ')[0],
+            },
+            'year': {'hi': self.data[14].split(' - ')[1],
+                     'low': self.data[14].split(' - ')[0]
+            }
         }
-
+        
         (self.EPS, self.PE) = (self.data[15], self.data[16])
 
         # div pay date, div per share, div yeild
@@ -449,7 +428,30 @@ class YahooQuoteFinder:
             'last_trade': {'date': self.data[39].split(" - ")[0],
                            'price': self.data[39].split(" - ")[1]
                            },
-            'day_range': self.data[41],
+            'day_range': {'low': self.data[41].split(" - ")[0],
+                          'high': self.data[41].split(" - ")[1]
+                          },
             'capital': self.data[42]
         }
+
+        """
+        Fundamental Attributes
+        """
+
+        # Obtaining these separately because they require
+        # special parsing and cannot be added to a list
+        # (they each become multiple items if they go through
+        #  cvsreader).
+
+        outstand = 'http://quote.yahoo.com/d?f=j2&s=%s' % self.symbol
+        f = urllib2.urlopen(outstand)
+        self.outstanding = int("".join(f.read().split(",")))
+
+        freefloat = 'http://quote.yahoo.com/d?f=f6&s=%s' % self.symbol
+        f = urllib2.urlopen(freefloat)
+        self.float = int("".join(f.read().split(",")))
+
+        # restricted is generated on the fly
+        self.restricted = self.outstanding - self.float
+
 

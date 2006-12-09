@@ -7,7 +7,7 @@ import urllib2
 import csv
 import re
 
-__revision__ = "$Id:$"
+__revision__ = "$Id$"
 
 class FeedError(Exception):
     """

@@ -6,9 +6,9 @@ import os
 import time
 import cPickle
 
-from pystocks.YahooFinance import YahooQuoteFinder
+from pystocks.YahooFinance import YahooQuoteFinder, SymbolError, FeedError
 
-__version__ = "$Id:$"
+__version__ = "$Id$"
 
 class PortfolioError(Exception):
     """
@@ -28,7 +28,13 @@ class QuoteFinder(YahooQuoteFinder):
         This is called by a PortfolioManager instance and
         returns a float.
         """
-        YahooQuoteFinder.__init__(self, symbol)
+        try:
+            YahooQuoteFinder.__init__(self, symbol)
+        except SymbolError, e:
+            raise PortfolioError(e)
+        except FeedError, e:
+            raise PortfolioError(e)
+
         return float(self.last_price)
 
 class StockContainer:

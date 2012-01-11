@@ -390,6 +390,8 @@ class YahooQuoteFinder:
                      float(self.dividend["yeild"]))
         except TypeError:
             value = 'N/A'
+        except ValueError:
+            value = 'N/A'
         self.dividend['value'] = value
 
 

@@ -1,13 +1,7 @@
-This project was imported in github for historical purposes. It has not been maintained since 2006.
+This project was developed in 2006, it used to be hosted on berlios which discontinued their 
+service. 
 
---- original README.txt ---
-At this time I am not aware of other people using PyStocks however I would like to
-hear from you if you do find it useful. Suggestions, feature requests, even 
-flames and (impossibly) bug reports are Welcome.
+I confirm that it still function as it did back in 2006 as of 2012-01-11 so it's still usable (yay!).
 
-Please consult the source through pydoc or the online documentation.
+Nicolas Couture - nicolas.couture@gmail.com
 
-http://pystocks.berlios.de/interfaces
-
-   Nicolas Couture - nicolas@stormvault.net
----
